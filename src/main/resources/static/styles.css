@@ -1,4 +1,10 @@
 body {
+
+  font-size: 14px;
+}
+.error {
+  color: red;
+
   font-size: 18px;
 }
 
@@ -10,4 +16,5 @@ li {
 li:hover {
     color: red;
     text-decoration: underline;
+
 }
