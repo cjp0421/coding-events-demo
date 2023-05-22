@@ -33,4 +33,6 @@ public class EventCategoryController {
         return "eventCategories/create";
     }
 
+
+
 }
