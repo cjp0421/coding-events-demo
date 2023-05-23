@@ -44,7 +44,7 @@ public class EventCategoryController {
             model.addAttribute(new EventCategory());
             return "eventCategories/create";
         }
-
+        eventCategoryRepository.save(eventCategory);
         return "redirect:";
     }
 
