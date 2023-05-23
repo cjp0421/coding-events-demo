@@ -1,9 +1,11 @@
 package org.launchcode.codingevents.models;
 
+
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 
 /**
  * Created by Chris Bay
@@ -38,6 +40,29 @@ public class Event extends AbstractEntity {
 
     public Event() {}
 
+
+public class Event {
+
+    private int id;
+    private static int nextId = 1;
+    @NotBlank
+    @Size(min=3,max = 50, message = "Name must be between 3 and 50 characters.")
+    private String name;
+    @Size(max=500, message = "Description is too long. Try again.")
+    private String description;
+    @NotBlank
+    @Email(message = "Invalid email. Try again.")
+    private String contactEmail;
+
+    public Event(String name, String description, String contactEmail) {
+        this.name = name;
+        this.description = description;
+        this.id = nextId;
+        this.contactEmail = contactEmail;
+        nextId++;
+    }
+
+
     public String getName() {
         return name;
     }
@@ -45,6 +70,7 @@ public class Event extends AbstractEntity {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getDescription() {
         return description;
@@ -54,6 +80,10 @@ public class Event extends AbstractEntity {
         this.description = description;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getContactEmail() {
         return contactEmail;
     }
@@ -61,6 +91,7 @@ public class Event extends AbstractEntity {
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
+
 
     public EventType getType() {
         return type;
@@ -74,21 +105,33 @@ public class Event extends AbstractEntity {
 //        return id;
 //    }
 
+
     @Override
     public String toString() {
         return name;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Event event = (Event) o;
-//        return id == event.id;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return id == event.id;
+
+        if (!(o instanceof Event)) return false;
+        Event event = (Event) o;
+        return getId() == event.getId();
+
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
+
+        return Objects.hash(getId());
+
+    }
+
 }
