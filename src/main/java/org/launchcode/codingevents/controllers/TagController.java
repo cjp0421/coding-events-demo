@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
@@ -26,6 +27,13 @@ public class TagController {
     }
 
     @GetMapping("create")
+    public String displayCreateTagForm(Model model) {
+        model.addAttribute("title","Create Tag");
+        model.addAttribute(new Tag());
+        return "tags/create";
+    }
+
+    @PostMapping("create")
     public String processCreateTagForm(@ModelAttribute @Valid Tag tag, Errors errors, Model model){
         if(errors.hasErrors()){
             model.addAttribute("title", "Create Tag");
